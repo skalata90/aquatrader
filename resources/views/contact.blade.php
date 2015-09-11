@@ -20,5 +20,5 @@
 					<input type="submit" value="Send">
 				</fielset>
 			</form>
-@endsection
+@stop
 		

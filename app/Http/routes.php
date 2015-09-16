@@ -51,105 +51,41 @@ Route::get('/', function () {
 
 	return view('welcome');
 
-
 });
 
-Route::get('about', function () {
+Route::get('about', "PagesController@showAbout");
 
-	return view('about');
-});
+Route::get('contact', "PagesController@showContact");
 
-Route::get('contact', function () {
+// Route::get('types/{id}', function ($id) {});
 
-	return view('contact');
-});
+Route::resource('types', 'TypesController');
 
-Route::get('types/{id}', function ($id) {
+// Route::get('products/create', "ProductsController@create");
 
-	$type = \App\Models\Type::find($id);
+// Route::post('products', "ProductsController@store");
 
-	return view('types',['type'=>$type]);
+// Route::get('products/{id}/edit', "ProductsController@edit");
 
-	// return view('types',compact("type"));  same as previos 
-	
-});
+// Route::put('products/{id}', "ProductsController@update");
 
-Route::get('products/create', function(){
-
-	return view('createProduct');
-	
-});
-
-Route::post('products', function(\App\Http\Requests\CreateProductRequest $request){
-
-	$product = \App\Models\Product::create($request->all());
-	
-	return redirect('types/'.$product->type->id);
-
-});
-
-Route::get('products/{id}/edit', function($id){
-
-	$product = \App\Models\Product::find($id);
-
-	return view('editProduct', compact('product'));
-	
-});
-
-Route::put('products/{id}', function($id, \App\Http\Requests\UpdateProductRequest $request){
-
-	$product = \App\Models\Product::find($id);
-
-	$product->fill($request->all());
-
-	$product->save();
-
-	return redirect('types/'.$product->type->id);
-	
-});
+Route::resource('products', 'ProductsController');
 
 
-Route::get('users/create', function(){
+// Route::get('users/create', "");
 
-	return view('createUser');
-});
+// Route::get('users/{id}', function($id){});
 
+// Route::post('users', function( $request){});
 
-Route::get('users/{id}', function($id){
+// Route::get('users/{id}/edit', function($id){});
 
-	$user = \App\Models\User::find($id);
+// Route::put('users/{id}', function($id,  $request){});
 
-	return view('usersProfile',['user'=>$user]);
+Route::resource('users', 'UsersController');
 
-});
+Route::get('login', "LoginController@showLoginForm");
 
+Route::post('login', "LoginController@processLogin");
 
-Route::post('users', function(\App\Http\Requests\CreateUserRequest $request){
-
-	$user = \App\Models\User::create($request->all());
-	
-	return redirect('users/'.$user->id);
-
-});
-
-
-Route::get('users/{id}/edit', function($id){
-
-	$user = \App\Models\User::find($id);
-
-	return view('editUser', compact('user'));
-	
-});
-
-
-Route::put('users/{id}', function($id, \App\Http\Requests\UpdateUserRequest $request){
-
-	$user = \App\Models\User::find($id);
-
-	$user->fill($request->all());
-
-	$user->save();
-
-	return redirect('users/'.$user->id);
-	
-});
+Route::get('logout', "LoginController@logout");

@@ -23,8 +23,10 @@ class UpdateUserRequest extends Request
      */
     public function rules()
     {
+
+
         return [
-            "username"=>"required",
+            "username"=>"required|unique:users,username,".$this->route('users'),
             "email"=>"required",
             "firstname"=>"required",
             "lastname"=>"required"

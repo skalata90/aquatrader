@@ -89,3 +89,5 @@ Route::get('login', "LoginController@showLoginForm");
 Route::post('login', "LoginController@processLogin");
 
 Route::get('logout', "LoginController@logout");
+
+Route::get('cart', "CartController@showCart");

@@ -24,5 +24,10 @@
 			
 			{!! Form::close() !!}
 
+
+			{!! Form::open(["url"=>"products/".$product->id, "method"=>"delete"]) !!} 
+			{!! Form::submit("Delete") !!}
+			{!! Form::close() !!}
+
 		</article>
 @stop
